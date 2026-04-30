@@ -1,19 +1,25 @@
 using UnityEngine;
 
+/// <summary>
+/// Follows the assigned player object by maintaining a fixed positional offset.
+/// Attach to the Main Camera and assign the Player reference in the Inspector.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
+    [Tooltip("The player GameObject the camera should follow")]
     public GameObject player;
-    private Vector3 offset;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Vector3 positionOffset;
+
+    private void Start()
     {
-        offset = transform.position - player.transform.position;
+        // Calculate the initial distance between camera and player
+        positionOffset = transform.position - player.transform.position;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        // Keep the camera at a constant offset from the player
+        transform.position = player.transform.position + positionOffset;
     }
 }

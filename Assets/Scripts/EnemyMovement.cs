@@ -1,23 +1,26 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Drives an enemy towards the player using Unity's NavMesh system.
+/// The enemy continuously re-targets the player's current position.
+/// </summary>
 public class EnemyMovement : MonoBehaviour
 {
+    [Tooltip("Reference to the player's Transform")]
     public Transform player;
-    private NavMeshAgent navMeshAgent;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private NavMeshAgent agent;
+
+    private void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (player != null)
-        {
-            navMeshAgent.SetDestination(player.position);
-        }
+        if (player == null) return;
+
+        agent.SetDestination(player.position);
     }
 }

@@ -1,11 +1,16 @@
 using UnityEngine;
 
+/// <summary>
+/// Continuously rotates the attached GameObject.
+/// Used on pickup items so they spin and attract the player's attention.
+/// </summary>
 public class Rotator : MonoBehaviour
 {
+    [Tooltip("Rotation speed in degrees per second for each axis")]
+    [SerializeField] private Vector3 rotationSpeed = new Vector3(15f, 30f, 45f);
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+        transform.Rotate(rotationSpeed * Time.deltaTime);
     }
 }
